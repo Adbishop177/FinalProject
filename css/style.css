@@ -1,0 +1,193 @@
+body {
+    font-family: 'Verdana', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #131111;
+    color: #f4f4f4;
+  }
+  
+  header {
+    background-color: #333;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #f4f4f4;
+    font-size: 1.3em;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  nav ul li a:hover {
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  main {
+    padding: 50px 20px;
+  }
+  
+  h1 {
+    font-size: 3em;
+    color: #ff6347;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    font-size: 1.2em;
+    line-height: 1.8em;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  form {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto 20px auto;
+  }
+  
+  form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #f4f4f4;
+  }
+  
+  form input, form select {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #222;
+    color: #f4f4f4;
+  }
+  
+ 
+  form .main-btn {
+    background-color: #ff6347;
+    border: none;
+    color: #ffffff;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5em;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  form .main-btn:hover {
+    background-color: #ff4500;
+    transform: scale(1.1);
+  }
+  
+  
+  form .roulette-btn {
+    background-color: #4CAF50;
+    border: none;
+    color: #e8f5e9;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.2em;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  form .roulette-btn:hover {
+    background-color: #45a049;
+    transform: scale(1.1);
+  }
+  
+  footer {
+    background-color: #333;
+    padding: 20px 0;
+    color: #f4f4f4;
+    font-size: 0.9em;
+    margin-top: 50px;
+  }
+  
+  footer a {
+    color: #ff6347;
+    text-decoration: none;
+  }
+  
+  footer a:hover {
+    text-decoration: underline;
+  }
+  
+ 
+  #wheel-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+
+
+#blackjack-image {
+    width: 70%;  
+    max-width: 1000px; 
+    height: auto;  
+    margin: 20px auto;  
+    display: block;  
+  }
+  ul {
+    list-style-type: none; 
+    padding-left: 0; 
+  }
+  #rule1 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;  
+    height: auto; 
+  }
+  #rule2 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;  
+    height: auto; 
+  }
+  #wheel-container {
+    position: relative; 
+    text-align: center; 
+  }
+  
+  #wheel {
+    width: 300px; 
+    height: auto;
+    position: relative;
+    margin: 0 auto;
+    top: 40px; 
+    transform-origin: center center;
+    transition: transform 3s ease;
+  }
+  
