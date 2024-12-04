@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roulette Game</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="rules.html">Rules</a></li>
+        <li><a href="play.html">Play</a></li>
+        <li><a href="about.html">About Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Roulette Game</h1>
+    <p>Place your bets and spin the wheel!</p>
+
+    <div id="game-area">
+      <p id="balance">Your Balance: $1000</p>
+      <form id="roulette-form">
+        <label for="color">Choose a color:</label>
+        <select id="color" name="color">
+          <option value="red">Red</option>
+          <option value="black">Black</option>
+        </select>
+
+        <label for="bet">Enter your bet amount (Max $500):</label>
+        <input type="number" id="bet" name="bet" min="1" max="500" required>
+
+        <button type="submit" class="roulette-btn">Spin the Wheel</button>
+      </form>
+
+      <div id="wheel-container">
+        <img id="wheel" src="img/roulette_main.png" alt="Roulette Wheel">
+      </div>
+
+      <p id="result"></p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy;Copyright 2024 Andrew Coen <a href="mailto:adbishop@usca.edu">adbishop@usca.edu </a><a
+        href="mailto:cabott@usca.edu">cabott@usca.edu</a></p>
+  </footer>
+
+  <script>
+    let balance = 1000;
+  
+    const wheelImages = [
+      { src: "img/roulette_red.png", color: "red" },
+      { src: "img/roulette_black.png", color: "black" },
+    ];
+  
+    function spinWheelAnimation(callback) {
+      const wheel = document.getElementById("wheel");
+      let angle = 0;
+      wheel.style.zIndex = "-1";  
+      const interval = setInterval(() => {
+        angle += 30;
+        wheel.style.transform = `rotate(${angle}deg)`;
+      }, 50);
+  
+      setTimeout(() => {
+        clearInterval(interval);
+        wheel.style.zIndex = "-1"; 
+        callback();
+      }, 3000);
+    }
+  
+    function determineResult() {
+      const randomIndex = Math.floor(Math.random() * wheelImages.length);
+      const chosenImage = wheelImages[randomIndex];
+      const wheel = document.getElementById("wheel");
+      wheel.src = chosenImage.src;
+      return chosenImage.color;
+    }
+  
+    document.getElementById('roulette-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+  
+      const color = document.getElementById('color').value;
+      const bet = parseInt(document.getElementById('bet').value);
+      const resultElement = document.getElementById('result');
+  
+      if (bet > balance) {
+        resultElement.textContent = "You cannot bet more than your current balance.";
+        return;
+      }
+  
+      resultElement.textContent = "Spinning the wheel...";
+      spinWheelAnimation(() => {
+        const winningColor = determineResult();
+  
+        let result = {};
+        if (color === winningColor) {
+          balance += bet;
+          result = {
+            outcome: "win",
+            wheelColor: winningColor,
+            amount: bet,
+            newBalance: balance
+          };
+          resultElement.textContent = `You won! The wheel landed on ${winningColor}. You now have $${balance}.`;
+        } else {
+          balance -= bet;
+          result = {
+            outcome: "loss",
+            wheelColor: winningColor,
+            amount: -bet,
+            newBalance: balance
+          };
+          resultElement.textContent = `You lost. The wheel landed on ${winningColor}. You now have $${balance}.`;
+        }
+  
+        document.getElementById('balance').textContent = `Your Balance: $${balance}`;
+  
+        // Save the result to Firebase
+        db.collection("RouletteResults").add(result)
+          .then(() => {
+            console.log("Result saved successfully!");
+          })
+          .catch((error) => {
+            console.error("Error saving result: ", error);
+          });
+  
+        if (balance <= 0) {
+          alert("Game over! You have run out of money.");
+          window.location.href = "index.html";
+        }
+      });
+    });
+  </script>
+  <script src="js/add-element.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+  <script>
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAbEtGIJ0f-jMZqXrh6rXoJKWqpyzNmPHA",
+      authDomain: "datavase-225.firebaseapp.com",
+      projectId: "datavase-225",
+      storageBucket: "datavase-225.appspot.com",
+      messagingSenderId: "602424955660",
+      appId: "1:602424955660:web:c1abab9516d42911e9ef29",
+      measurementId: "G-5TC8JKG01M"
+    };
+  
+    // Initialize Firebase
+    const firebaseApp = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+  
+</body>
+
+</html>
