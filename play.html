@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack Game</title>
+    <link rel="stylesheet" href="css/style2.css">
+</head>
+<body>
+    <header>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="roulette.html">Roulette</a></li>
+            <li><a href="about.html">About Us</a></li>
+          </ul>
+        </nav>
+      </header>
+    <div class="game-container">
+        <h1>Blackjack Game</h1>
+        <div id="message"></div>
+
+        
+            <div id="dealer-area">
+                <h2>Dealer's Hand</h2>
+                <div id="dealer-cards" class="cards"></div>
+                <div id="dealer-score" class="score" hidden>Score: 0</div>
+            </div>
+            <div class="players">
+                <div id="player-area">
+                    <h2>Your Hand</h2>
+                    <div id="player-cards" class="cards"></div>
+                    <div id="player-score">Score: 0</div>
+                </div>
+        </div>
+
+        <div class="controls">
+            <button id="hit-btn">Hit</button>
+            <button id="stand-btn">Stand</button>
+            <button id="double-btn">Double Down</button>
+            <button id="start-btn">Start New Game</button>
+        </div>
+        
+    </div>
+
+    <script src="js/script.js"></script>
+    
+
+
+
+
+    <footer>
+        <p>&copy; 2024 Andrew Coen <a href="mailto:adbishop@usca.edu">adbishop@usca.edu</a><a href="mailto:cabott@usca.edu">cabott@usca.edu</a></p>
+      </footer>
+</body>
+</html>
