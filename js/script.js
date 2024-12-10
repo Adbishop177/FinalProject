@@ -85,20 +85,27 @@ function displayCards() {
         const img = document.createElement('img');
         img.classList.add('card');
 
+        // Show only the first card and hide the second card if the game is still in progress
         if (i === 1 && !gameOver) {
-            // Show the back of the second card if the game is still in progress
-            img.src = 'img/card_back.png';
+            img.src = getCardBackImage(); // Back of the card
         } else {
-            // Show the front of the card
-            img.src = getCardImage(dealerHand[i]);
+            img.src = getCardImage(dealerHand[i]); // Front of the card
         }
 
         dealerCardsDiv.appendChild(img);
     }
 
+    // Show the player's score
     document.getElementById('player-score').textContent = `Score: ${playerScore}`;
-    document.getElementById('dealer-score').textContent = `Score: ${dealerScore}`;
+
+    // Show dealer's score only if the game is over
+    if (gameOver) {
+        document.getElementById('dealer-score').textContent = `Score: ${dealerScore}`;
+    } else {
+        document.getElementById('dealer-score').textContent = `Score: ?`;
+    }
 }
+
 
 
 
@@ -128,6 +135,9 @@ function startGame() {
 
     displayCards();
 
+    // Hide the dealer's score initially
+    document.getElementById('dealer-score').textContent = `Score: ?`;
+    
     // Enable the Double Down button only after the initial deal
     canDouble = playerHand.length === 2;
     document.getElementById('double-btn').disabled = !canDouble;
@@ -140,6 +150,7 @@ function startGame() {
 
     setMessage('');
 }
+
 
 // Function to handle the "hit" action
 function hit() {
